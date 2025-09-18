@@ -16,5 +16,9 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        // React Native artifacts
+        maven {
+            url("$rootDir/../node_modules/react-native/android")
+        }
     }
 }
