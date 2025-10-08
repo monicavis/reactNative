@@ -1,55 +1,41 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+}
 
 android {
-    namespace "com.myapp"   // <-- Add this line
-
-    compileSdkVersion 34
+    namespace 'com.myapp'
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.myapp"
-        minSdkVersion 24
-        targetSdkVersion 34
+        minSdk 24
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
-        // 👇 Add these
-        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", "false"
-        buildConfigField "boolean", "IS_HERMES_ENABLED", "true"
+        // Example BuildConfig field
+        buildConfigField "String", "API_URL", "\"https://api.example.com\""
     }
 
     buildFeatures {
-        buildConfig true   // 👈 force generate BuildConfig.java
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+        buildConfig true
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = "17"
     }
-}
 
+    // Add empty block if using external native build to prevent errors
+    externalNativeBuild {}
+}
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.22"
-
-    // AppCompat + Material
-    implementation "androidx.appcompat:appcompat:1.6.1"
-    implementation "com.google.android.material:material:1.9.0"
-
-    // React Native (must match RN version)
-    implementation("com.facebook.react:react-android:0.81.1")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.24"
+    implementation "com.facebook.react:react-android:+"
 }
-
-

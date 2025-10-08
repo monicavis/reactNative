@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MyApp</string>
+
+    <!-- Add this line -->
+    <string name="debug_server_host">192.168.31.225:8081</string>
 </resources>
