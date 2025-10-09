@@ -1,23 +1,4 @@
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-        maven { url("$rootDir/../node_modules/react-native-gradle-plugin") }
-    }
-}
-
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
-    repositories {
-        google()
-        mavenCentral()
-        maven { url("$rootDir/../node_modules/react-native-gradle-plugin") }
-    }
-}
-
 rootProject.name = "MyApp"
-include(":app")
-
-// Include the React Native Gradle Plugin
-includeBuild("../node_modules/react-native-gradle-plugin")
+include ':app'
+include ':react-native-new-architecture'
+project(':react-native-new-architecture').projectDir = new File(rootProject.projectDir, '../node_modules/react-native/ReactAndroid/ReactAndroid/build.gradle')

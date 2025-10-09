@@ -1,12 +1,11 @@
 package com.myapp;
 
 import android.app.Application;
+import android.content.res.Configuration;
 import com.facebook.react.ReactApplication;
-import com.facebook.react.ReactNativeHost;
+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
-import com.facebook.soloader.SoLoader;
-import java.util.List;
-import java.util.ArrayList;
+import com.facebook.react.ReactNativeHost;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -18,23 +17,13 @@ public class MainApplication extends Application implements ReactApplication {
         }
 
         @Override
-        protected List getPackages() {
-          return new ArrayList<>();
-        }
-
-        @Override
-        protected String getJSMainModuleName() {
-          return "index";
+        protected boolean isNewArchEnabled() {
+          return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
         }
 
         @Override
         protected boolean isHermesEnabled() {
           return BuildConfig.IS_HERMES_ENABLED;
-        }
-
-        @Override
-        protected boolean isNewArchEnabled() {
-          return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
         }
       };
 
@@ -46,10 +35,14 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    SoLoader.init(this, false);
 
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
-      com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load();
+      DefaultNewArchitectureEntryPoint.load();
     }
+  }
+
+  @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
   }
 }
